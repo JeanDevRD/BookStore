@@ -8,7 +8,7 @@ export async function GetIndex(req, res, next) {
         res.render("author/index", {
             authorsList: authors,
             hasAuthors: authors.length > 0,
-            "page-tittle": "Authors list"
+            "page-title": "Authors list"
         });
     } catch (ex) {
         console.error("Error fetching Authors", ex);
@@ -32,7 +32,7 @@ export async function PostCreate(req, res, next) {
     }
 }
 
-export async function getEdit(req, res, next) {
+export async function GetEdit(req, res, next) {
     const id = req.params.authorId
     try {
         const result = await context.authors.findOne({ where: { id: id } })

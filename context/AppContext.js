@@ -2,7 +2,7 @@ import connection from "../utils/DbConnection.js"
 import AuthorModel from "../models/AuthorModel.js"
 import CategoryModel from "../models/CategoryModel.js"
 import BookModel from "../models/BookModel.js"
-import PublisherModel from "../models/BookModel.js"
+import PublisherModel from "../models/PublisherModel.js"
 
 try{
     await connection.authenticate();

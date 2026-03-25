@@ -5,6 +5,11 @@ import { Equals } from "./utils/helpers/Compare.js"
 import path from "path"
 import { projectRoot } from "./utils/Paths.js"
 import multer from "multer";
+import context from "./context/AppContext.js"
+import authorRoutes from "./routes/AuthorRoutes.js";
+import categoryRoutes from "./routes/CategoryRoutes.js";
+import bookRoutes from "./routes/BookRoutes.js";
+import publisherRoutes from "./routes/PublisherRoutes.js";
 
 
 const app = express();
@@ -40,8 +45,20 @@ const imageStorageForCoverImageBooks = multer.diskStorage({
 
 app.use(multer({ storage: imageStorageForCoverImageBooks}).single("coverImage"));
 
+app.use("/authors", authorRoutes);
+app.use("/categories", categoryRoutes);
+app.use("/books", bookRoutes);
+app.use("/publishers", publisherRoutes);
+
 app.use((req,res) => {
     res.status(400).render("404", {"page-tittle": "Not Found"})
 });
 
-app.listen(process.env.PORT || 5000);
+try{
+    await context.sequelize.async({alter: true});
+    app.listen(process.env.PORT || 5000);
+    console.log("Database is running")
+}
+catch(ex){
+    console.log(`Error conecting database: ${ex}`)
+}

@@ -1,0 +1,81 @@
+<div class="row mb-4">
+    <div class="col-12">
+        <h1><i class="bi bi-house"></i> Catálogo de libros</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form method="GET" action="/home">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-12 col-sm-5">
+                            <label for="title" class="form-label fw-semibold">Buscar por título</label>
+                            <input type="text" id="title" name="title" class="form-control"
+                                placeholder="Ingrese un título..." value="{{formData.title}}" />
+                        </div>
+                        <div class="col-12 col-sm-5">
+                            <label for="categoryId" class="form-label fw-semibold">Filtrar por categoría</label>
+                            <select id="categoryId" name="categoryId" class="form-select">
+                                <option value="">Todas las categorías</option>
+                                {{#each categories}}
+                                <option value="{{this.id}}" {{#if (eq this.id ../formData.categoryId)}}selected{{/if}}>{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-2">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-search"></i> Buscar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#if hasBooks}}
+<div class="row">
+    {{#each books}}
+    <div class="col-12 col-sm-4 col-md-3 mb-4">
+        <div class="card shadow-sm h-100">
+            {{#if this.coverImage}}
+            <img src="{{this.coverImage}}" class="card-img-top" alt="Portada de {{this.title}}" style="height: 200px; object-fit: cover;">
+            {{else}}
+            <div class="d-flex align-items-center justify-content-center bg-light" style="height: 200px;">
+                <i class="bi bi-book fs-1 text-muted"></i>
+            </div>
+            {{/if}}
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{this.title}}</h5>
+                <p class="text-muted small mb-1">
+                    <i class="bi bi-person me-1"></i>{{this.Author.name}}
+                </p>
+                <p class="text-muted small mb-1">
+                    <i class="bi bi-tag me-1"></i>{{this.Category.name}}
+                </p>
+                <p class="text-muted small mb-1">
+                    <i class="bi bi-building me-1"></i>{{this.Publisher.name}}
+                </p>
+                <div class="mt-auto pt-3">
+                    <a href="/home/detail/{{this.id}}" class="btn btn-outline-primary btn-sm w-100">
+                        <i class="bi bi-eye"></i> Ver detalle
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+{{else}}
+<div class="row d-flex justify-content-center">
+    <div class="col-12 col-sm-5">
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No se encontraron libros.
+        </div>
+    </div>
+</div>
+{{/if}}

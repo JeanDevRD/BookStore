@@ -1,0 +1,59 @@
+<div class="row mb-3">
+    <div class="col-12">
+        <a href="/home" class="btn btn-secondary btn-sm mb-3">
+            <i class="bi bi-arrow-left"></i> Volver al catálogo
+        </a>
+    </div>
+</div>
+
+<div class="row d-flex justify-content-center">
+    <div class="col-12 col-sm-8">
+        <div class="card shadow-sm">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    {{#if book.coverImage}}
+                    <img src="{{book.coverImage}}" class="img-fluid rounded-start h-100" alt="Portada de {{book.title}}" style="object-fit: cover;">
+                    {{else}}
+                    <div class="d-flex align-items-center justify-content-center bg-light h-100 rounded-start" style="min-height: 300px;">
+                        <i class="bi bi-book fs-1 text-muted"></i>
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h2 class="card-title">{{book.title}}</h2>
+                        <hr />
+                        <p class="mb-2">
+                            <span class="fw-semibold"><i class="bi bi-person me-1"></i>Autor:</span>
+                            {{book.Author.name}}
+                        </p>
+                        <p class="mb-2">
+                            <span class="fw-semibold"><i class="bi bi-envelope me-1"></i>Contacto:</span>
+                            {{book.Author.email}}
+                        </p>
+                        <p class="mb-2">
+                            <span class="fw-semibold"><i class="bi bi-tag me-1"></i>Categoría:</span>
+                            {{book.Category.name}}
+                        </p>
+                        <p class="mb-2">
+                            <span class="fw-semibold"><i class="bi bi-building me-1"></i>Editorial:</span>
+                            {{book.Publisher.name}}
+                        </p>
+                        <p class="mb-2">
+                            <span class="fw-semibold"><i class="bi bi-telephone me-1"></i>Tel. Editorial:</span>
+                            {{book.Publisher.phone}}
+                        </p>
+                        <p class="mb-2">
+                            <span class="fw-semibold"><i class="bi bi-geo-alt me-1"></i>Ciudad:</span>
+                            {{book.Publisher.city}}
+                        </p>
+                        <p class="mb-2">
+                            <span class="fw-semibold"><i class="bi bi-calendar me-1"></i>Año de publicación:</span>
+                            {{book.publicationYear}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -79,7 +79,7 @@ export async function PostEdit(req, res, next){
 }
 
 export async function Delete(req,res,next){
-    const id = req.body.CategoryModel;
+    const id = req.body.id;
 
     try{
         const result = await context.CategoryModel.findOne({where: {id: id}})

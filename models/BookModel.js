@@ -10,7 +10,7 @@ const Books = connection.define(
             primaryKey: true,
             allowNull: false,
         },
-        tittle: {
+        title: {
             type: DataTypes.STRING,
             allowNull: false,
         },

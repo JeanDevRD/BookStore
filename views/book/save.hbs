@@ -1,0 +1,87 @@
+<div class="row mb-3">
+    <h1>{{#if editMode}}Editar libro{{else}}Crear libro{{/if}}</h1>
+    <hr />
+</div>
+
+<div class="row d-flex justify-content-center">
+    <div class="col-12 col-sm-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form method="post" action="/books/{{#if editMode}}edit{{else}}create{{/if}}" enctype="multipart/form-data">
+                    {{#if editMode}}
+                    <input type="hidden" name="bookId" value="{{book.id}}">
+                    {{/if}}
+                    <div class="mb-3">
+                        <label for="title" class="form-label fw-semibold">Título</label>
+                        <input type="text" id="title" name="title" class="form-control"
+                            value="{{#if editMode}}{{book.title}}{{else}}{{formData.title}}{{/if}}" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="publicationYear" class="form-label fw-semibold">Año de publicación</label>
+                        <input type="date" id="publicationYear" name="publicationYear" class="form-control"
+                            value="{{#if editMode}}{{book.publicationYear}}{{else}}{{formData.publicationYear}}{{/if}}" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="coverImage" class="form-label fw-semibold">Imagen de portada</label>
+                        {{#if editMode}}
+                        {{#if book.coverImage}}
+                        <div class="mb-2">
+                            <img src="{{book.coverImage}}" alt="Portada actual" style="height: 100px; object-fit: cover;">
+                        </div>
+                        {{/if}}
+                        {{/if}}
+                        <input type="file" id="coverImage" name="coverImage" class="form-control" accept="image/*" {{#unless editMode}}required{{/unless}} />
+                    </div>
+                    <div class="mb-3">
+                        <label for="athorId" class="form-label fw-semibold">Autor</label>
+                        {{#if hasAuthors}}
+                        <select id="athorId" name="athorId" class="form-select" required>
+                            <option value="">Seleccione un autor</option>
+                            {{#each authorsList}}
+                            <option value="{{this.id}}" {{#if (eq this.id ../book.athorId)}}selected{{/if}}>{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                        {{else}}
+                        <div class="alert alert-warning">No hay autores registrados.</div>
+                        {{/if}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoriesId" class="form-label fw-semibold">Categoría</label>
+                        {{#if hasCategories}}
+                        <select id="categoriesId" name="categoriesId" class="form-select" required>
+                            <option value="">Seleccione una categoría</option>
+                            {{#each categoriesList}}
+                            <option value="{{this.id}}" {{#if (eq this.id ../book.categoriesId)}}selected{{/if}}>{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                        {{else}}
+                        <div class="alert alert-warning">No hay categorías registradas.</div>
+                        {{/if}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="publisherId" class="form-label fw-semibold">Editorial</label>
+                        {{#if hasPublishers}}
+                        <select id="publisherId" name="publisherId" class="form-select" required>
+                            <option value="">Seleccione una editorial</option>
+                            {{#each publishersList}}
+                            <option value="{{this.id}}" {{#if (eq this.id ../book.publisherId)}}selected{{/if}}>{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                        {{else}}
+                        <div class="alert alert-warning">No hay editoriales registradas.</div>
+                        {{/if}}
+                    </div>
+                    <div class="d-flex gap-2 mt-4">
+                        <a href="/books/index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Volver
+                        </a>
+                        <button type="submit" class="btn btn-{{#if editMode}}primary{{else}}success{{/if}}">
+                            <i class="bi bi-check-circle"></i>
+                            {{#if editMode}}Guardar cambios{{else}}Crear libro{{/if}}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

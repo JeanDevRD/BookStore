@@ -58,7 +58,7 @@ export async function PostCreate(req, res, next) {
     const coverImagePath = "\\" + path.relative("public", coverImage.path);
 
     await context.BookModel.create({
-      tittle: title,
+      title: title,
       publicationYear,
       coverImage: coverImagePath,
       categoriesId,
@@ -110,7 +110,7 @@ export async function GetEdit(req, res, next) {
       hasAuthors: authors.length > 0,
       publishersList: publishers,
       hasPublishers: publishers.length > 0,
-      "page-title": `Edit Book: ${book.tittle}`,
+      "page-title": `Edit Book: ${book.title}`,
     });
   } catch (err) {
     console.error("Error fetching book for edit:", err);
@@ -137,7 +137,7 @@ export async function PostEdit(req, res, next) {
 
     await context.BookModel.update(
       {
-        tittle: title,
+        title: title,
         publicationYear,
         coverImage: coverImagePath,
         categoriesId,

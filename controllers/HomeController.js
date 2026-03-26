@@ -16,7 +16,7 @@ export async function GetHome(req, res, next) {
 
         if(title){
             booksData = booksData.filter(t => 
-                t.name.toLowerCase().includes(serchTerm.toLowerCase())
+                t.title.toLowerCase().includes(serchTerm.toLowerCase())
             );
         }
 
@@ -35,5 +35,26 @@ export async function GetHome(req, res, next) {
         })
     } catch (ex) {
         console.log(`Error in get gome ${ex}`)
+    }
+}
+
+export async function GetDetail(req, res, next) {
+    const id = req.params.bookId;
+    try {
+        const result = await context.BookModel.findOne({
+            where: { id },
+            include: [
+                { model: context.AuthorModel },
+                { model: context.CategoryModel },
+                { model: context.PublisherModel }
+            ]
+        });
+        if (!result) return res.redirect("/home");
+        res.render("home/detail", {
+            book: result.get({ plain: true }),
+            "page-title": result.title
+        });
+    } catch (ex) {
+        console.log(`Error in GetDetail: ${ex}`);
     }
 }

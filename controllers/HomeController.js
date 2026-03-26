@@ -31,7 +31,7 @@ export async function GetHome(req, res, next) {
             categories: categoriesData,
             books: booksData,
             hasBooks: booksData.length > 0,
-            formData: {title, categoryId}
+            formData: { title, categoryId }
         })
     } catch (ex) {
         console.log(`Error in get gome ${ex}`)

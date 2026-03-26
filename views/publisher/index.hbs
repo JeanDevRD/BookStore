@@ -1,0 +1,64 @@
+<div class="row mb-3">
+    <h1><i class="bi bi-geo-alt"></i>Editoriales</h1>
+    <hr />
+</div>
+
+<div class="row mb-3">
+    <div class="col-12">
+        <a href="/publishers/create" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Nueva Editorial
+        </a>
+    </div>
+</div>
+
+{{#if hasPublishers}}
+<div class="row">
+    {{#each publishersList}}
+    <div class="col-12 col-sm-4 col-md-4 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-tag-fill"></i> {{this.name}}</h5>
+                <p class="text-muted small">
+                    <i class="bi bi-telephone me-1"></i>Telefono: {{this.phone}}
+                </p>
+                <p class="text-muted small">
+                    <i class="bi bi-geo-alt me-1"></i>Ciudad: {{this.city}}
+                </p>
+                <div class="mt-3 d-flex gap-2">
+                    <a href="/publishers/edit/{{this.id}}" class="btn btn-primary btn-sm">
+                        <i class="bi bi-pencil"></i> Editar
+                    </a>
+                    <form action="/publishers/delete" method="POST">
+                        <input type="hidden" name="publisherId" value="{{this.id}}">
+                        <button type="submit" class="btn btn-danger btn-sm confirm-delete">
+                            <i class="bi bi-trash3"></i> Eliminar
+                        </button>
+                    </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+{{else}}
+<div class="row d-flex justify-content-center">
+    <div class="col-12 col-sm-5">
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No hay ediroriales registradas.
+        </div>
+    </div>
+</div>
+{{/if}}
+
+{{#section "scripts"}}
+<script>
+    document.querySelectorAll(".confirm-delete").forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+            if (!confirm(`¿Está seguro que desea eliminar esta editorial?`)) {
+                e.preventDefault();
+            }
+        });
+    });
+</script>
+{{/section}}

@@ -54,11 +54,11 @@ app.use("/books", bookRoutes);
 app.use("/publishers", publisherRoutes);
 
 app.use((req,res) => {
-    res.status(400).render("404", {"page-tittle": "Not Found"})
+    res.status(400).render("404", {"page-title": "Not Found"})
 });
 
 try{
-    await context.sequelize.async({alter: true});
+    await context.sequelize.sync({alter: true});
     app.listen(process.env.PORT || 5000);
     console.log("Database is running")
 }

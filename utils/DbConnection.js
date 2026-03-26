@@ -1,4 +1,3 @@
-import "./utils/LoadEnvConfiguration.js";
 import Sequelize from "sequelize"
 import { projectRoot } from "./Paths.js"
 import path from "path"
@@ -6,9 +5,9 @@ import path from "path"
 let connection;
 
 if(process.env.DB_DIALECT == "sqlite"){
-    connection = new Sequelize("sqlite:db.sqlite", {
+    connection = new Sequelize("sqlite:db.sqlite",{
         dialect: process.env.DB_DIALECT,
-        stirage: path.join(projectRoot,process.env.DB_FOLDER,
+        storage: path.join(projectRoot,process.env.DB_FOLDER,
                            process.env.DB_FILENAME   
         ),
     });

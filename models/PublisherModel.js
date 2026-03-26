@@ -6,7 +6,7 @@ const Publishers = connection.define("Publishers",
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
-            primarykey: true,
+            primaryKey: true,
             allowNull: false
         },
 

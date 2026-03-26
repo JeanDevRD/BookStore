@@ -11,13 +11,13 @@ try{
     console.error("Error, database connection:", err);
 }
 
-BookModel.belongsTo(AuthorModel, { foreignkey: "athorId"});
-BookModel.belongsTo(CategoryModel, { foreignkey: "athorId"});
-BookModel.belongsTo(PublisherModel, { foreignkey: "publisherId"});
+BookModel.belongsTo(AuthorModel, { foreignKey: "athorId" });
+BookModel.belongsTo(CategoryModel, { foreignKey: "categoriesId" });
+BookModel.belongsTo(PublisherModel, { foreignKey: "publisherId" });
 
-AuthorModel.hasMany(BookModel, { foreignkey: "athorId"});
-CategoryModel.hasMany(BookModel, { foreignkey: "categoryId"});
-PublisherModel.hasMany(BookModel, { foreignkey: "publisherId"});
+AuthorModel.hasMany(BookModel, { foreignKey: "athorId" });
+CategoryModel.hasMany(BookModel, { foreignKey: "categoriesId" });
+PublisherModel.hasMany(BookModel, { foreignKey: "publisherId" });
 
 export default {
     sequelize: connection,

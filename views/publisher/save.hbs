@@ -1,0 +1,49 @@
+<div class="row mb-3">
+    <h1>{{#if editMode}}Editar editorial{{else}}Crear editorial{{/if}}</h1>
+    <hr />
+</div>
+
+<div class="row d-flex justify-content-center">
+    <div class="col-12 col-sm-7">
+
+        {{#if error}}
+        <div class="alert alert-danger"><i class="bi bi-exclamation-triangle"></i> {{error}}</div>
+        {{/if}}
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form method="post" action="/publishers/{{#if editMode}}edit{{else}}create{{/if}}">
+                    {{#if editMode}}
+                    <input type="hidden" name="publisherId" value="{{publisher.id}}">
+                    {{/if}}
+                    <div class="mb-3">
+                        <label for="name" class="form-label fw-semibold">Nombre de la editorial</label>
+                        <input type="text" id="name" name="name" class="form-control"
+                            value="{{#if editMode}}{{publisher.name}}{{else}}{{formData.name}}{{/if}}" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label fw-semibold"> Télefono </label>
+                        <input type="tel" id="phone" name="phone" class="form-control"
+                            value="{{#if editMode}}{{publisher.phone}}{{else}}{{formData.name}}{{/if}}" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="city" class="form-label fw-semibold"> Ciudad </label>
+                        <input type="text" id="city" name="city" class="form-control"
+                            value="{{#if editMode}}{{publisher.city}}{{else}}{{formData.name}}{{/if}}" required />
+                    </div>
+
+                    <div class="d-flex gap-2 mt-4">
+                        <a href="/publishers/index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Volver
+                        </a>
+                        <button type="submit" class="btn btn-{{#if editMode}}primary{{else}}success{{/if}}">
+                            <i class="bi bi-check-circle"></i>
+                            {{#if editMode}}Guardar cambios{{else}}editar{{/if}}
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

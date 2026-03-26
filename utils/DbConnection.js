@@ -1,5 +1,6 @@
+import "./utils/LoadEnvConfiguration.js";
 import Sequelize from "sequelize"
-import { projectRoot } from "./Paths"
+import { projectRoot } from "./Paths.js"
 import path from "path"
 
 let connection;

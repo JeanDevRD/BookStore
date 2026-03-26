@@ -1,4 +1,4 @@
-import connection from "../utils/DbConnection";
+import connection from "../utils/DbConnection.js";
 import { DataTypes } from "sequelize";
 
 const Publishers = connection.define("Publishers",

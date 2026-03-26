@@ -1,4 +1,4 @@
-import context from "../context/AppContext"
+import context from "../context/AppContext.js"
 
 export async function GetIndex(req, res, next) {
     try {

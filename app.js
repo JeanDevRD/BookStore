@@ -5,11 +5,13 @@ import { Equals } from "./utils/helpers/Compare.js"
 import path from "path"
 import { projectRoot } from "./utils/Paths.js"
 import multer from "multer";
+import "./utils/LoadEnvConfiguration.js"
 import context from "./context/AppContext.js"
 import authorRoutes from "./routes/AuthorRoutes.js";
 import categoryRoutes from "./routes/CategoryRoutes.js";
 import bookRoutes from "./routes/BookRoutes.js";
 import publisherRoutes from "./routes/PublisherRoutes.js";
+import homeRoutes from "./routes/HomeRoutes.js"
 
 
 const app = express();
@@ -45,6 +47,7 @@ const imageStorageForCoverImageBooks = multer.diskStorage({
 
 app.use(multer({ storage: imageStorageForCoverImageBooks}).single("coverImage"));
 
+app.use("/home", homeRoutes);
 app.use("/authors", authorRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/books", bookRoutes);

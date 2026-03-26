@@ -1,7 +1,7 @@
 import context from "../context/AppContext.js"
 
 export async function GetHome(req, res, next) {
-    const { title, categoryId } = req.body;
+    const { title, categoryId } = req.query; 
 
     try {
         let books = await context.BookModel.findAll({
@@ -16,15 +16,15 @@ export async function GetHome(req, res, next) {
 
         if(title){
             booksData = booksData.filter(t => 
-                t.title.toLowerCase().includes(serchTerm.toLowerCase())
+                t.title.toLowerCase().includes(title.toLowerCase()) 
             );
         }
 
         if(categoryId){
-            booksData.filter(p => p.categoryId == categoryId)
+            booksData = booksData.filter(p => p.categoriesId == categoryId) 
         }
         const categories = await context.CategoryModel.findAll()
-        const categoriesData = categories.map(c => c.dataVaules);
+        const categoriesData = categories.map(c => c.dataValues); 
 
         res.render("home/index",{
             "page-title": "home",

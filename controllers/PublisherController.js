@@ -78,7 +78,7 @@ export async function PostEdit(req, res, next) {
 
 export async function Delete(req, res, next) {
   try {
-    const id = req.body.publisherId;
+    const id = req.body.id;
 
     const result = await context.PublisherModel.findOne({ where: { id } });
 
@@ -92,4 +92,19 @@ export async function Delete(req, res, next) {
   } catch (err) {
     console.error("Error deleting publisher:", err);
   }
+}
+
+export async function GetDelete(req, res, next) {
+    const id = req.params.publisherId;
+    try {
+        const result = await context.PublisherModel.findOne({ where: { id: id } });
+        if (!result) return res.redirect("/publishers/index");
+        const publisher = result.dataValues;
+        return res.render("publisher/delete", {
+            publisher: publisher,
+            "page-title": `Eliminar editorial: ${publisher.name}`
+        });
+    } catch (err) {
+        console.error("Error fetching publisher for delete", err);
+    }
 }

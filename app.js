@@ -39,15 +39,15 @@ const imageStorageForCoverImageBooks = multer.diskStorage({
         cb(null, path.join(projectRoot, "public", "Images", "coverImages" ));
     },
     filename: (req,file,cb) => {
-        const ramdomNumber = Math.Floor(Math.random() * 100000);
-        const fileName = `${file.originalname}/${ramdomNumber}`;
+        const ramdomNumber = Math.floor(Math.random() * 100000);
+        const fileName = `${file.originalname}_${ramdomNumber}`;
         cb(null, fileName)
     }
 });
 
 app.use(multer({ storage: imageStorageForCoverImageBooks}).single("coverImage"));
 
-app.use("/home", homeRoutes);
+app.use("/", homeRoutes);
 app.use("/authors", authorRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/books", bookRoutes);

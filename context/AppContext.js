@@ -8,7 +8,7 @@ try{
     await connection.authenticate();
     console.log("Database connection established")
 } catch (ex) {
-    console.error("Error, database connection:", err);
+    console.error("Error, database connection:", ex);
 }
 
 BookModel.belongsTo(AuthorModel, { foreignKey: "athorId" });

@@ -177,3 +177,20 @@ export async function Delete(req, res, next) {
     console.error("Error deleting book:", err);
   }
 }
+
+export async function GetDelete(req, res, next) {
+    const id = req.params.bookId;
+    try {
+        const result = await context.BookModel.findOne({
+            where: { id },
+            include: [{ model: context.AuthorModel }]
+        });
+        if (!result) return res.redirect("/books/index");
+        return res.render("book/delete", {
+            book: result.get({ plain: true }),
+            "page-title": `Eliminar libro: ${result.title}`
+        });
+    } catch (err) {
+        console.error("Error fetching book for delete", err);
+    }
+}

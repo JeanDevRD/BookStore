@@ -6,6 +6,7 @@ import {
   Delete,
   GetEdit,
   PostEdit,
+  GetDelete,
 } from "../controllers/CategoryController.js";
 
 const router = express.Router();
@@ -16,5 +17,6 @@ router.post("/create", PostCreate);
 router.post("/delete", Delete);
 router.get("/edit/:categoryId", GetEdit);
 router.post("/edit", PostEdit);
+router.get("/delete/:categoryId", GetDelete);
 
 export default router;

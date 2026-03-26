@@ -19,7 +19,7 @@ if(process.env.DB_DIALECT == "sqlite"){
         {
             dialect: process.env.DB_DIALECT,
             host: process.env.DB_HOST,
-            PORT: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 3305,
+            PORT: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 3306,
         }
     )
 }else{

@@ -25,12 +25,9 @@
                     <a href="/categories/edit/{{this.id}}" class="btn btn-primary btn-sm">
                         <i class="bi bi-pencil"></i> Editar
                     </a>
-                    <form action="/categories/delete" method="POST">
-                        <input type="hidden" name="id" value="{{this.id}}">
-                        <button type="submit" class="btn btn-danger btn-sm confirm-delete">
-                            <i class="bi bi-trash3"></i> Eliminar
-                        </button>
-                    </form>
+                    <a href="/categories/delete/{{this.id}}" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash3"></i> Eliminar
+                    </a>
                 </div>
             </div>
         </div>
@@ -48,13 +45,5 @@
 {{/if}}
 
 {{#section "scripts"}}
-<script>
-    document.querySelectorAll(".confirm-delete").forEach((btn) => {
-        btn.addEventListener("click", function (e) {
-            if (!confirm("¿Está seguro que desea eliminar esta categoría?")) {
-                e.preventDefault();
-            }
-        });
-    });
-</script>
+ 
 {{/section}}

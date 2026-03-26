@@ -15,7 +15,7 @@ const Books = connection.define(
             allowNull: false,
         },
         publicationYear: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
         },
         coverImage: {
@@ -48,7 +48,7 @@ const Books = connection.define(
         },
     },
     {
-        totableName: "Books"
+        tableName: "Books"
     }
 )
 

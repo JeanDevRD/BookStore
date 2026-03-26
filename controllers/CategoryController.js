@@ -15,7 +15,7 @@ export async function GetIndex(req, res, next) {
     }
 }
 
-export async function GetCreate(res, req, next) {
+export async function GetCreate(req, res, next) { 
     res.render("category/save", {
         editMode: false,
         "page-title": "New category"
@@ -27,7 +27,7 @@ export async function PostCreate(req, res, next) {
 
     try {
         await context.CategoryModel.create({ name: name, description: description })
-        res.redirect("/category/index")
+        res.redirect("/categories/index") 
     } catch (ex) {
         console.error("Error creating category", ex)
     }
@@ -39,7 +39,7 @@ export async function GetEdit(req, res, next){
     try{
         const result = await context.CategoryModel.findOne({where: {id: id}});
         if(!result){
-         return res.redirect("/category/index")
+         return res.redirect("/categories/index") 
         }
 
         const category = result.dataValues
@@ -62,7 +62,7 @@ export async function PostEdit(req, res, next){
         const result = await context.CategoryModel.findOne({where: {id: id}})
 
         if(!result){
-            return res.redirect("/category/index")
+            return res.redirect("/categories/index") 
         }
 
         await context.CategoryModel.update(
@@ -70,7 +70,7 @@ export async function PostEdit(req, res, next){
             {where: {id: id}}
         )
 
-        return res.redirect("/category/index")
+        return res.redirect("/categories/index") 
     
 
     }catch(ex){
@@ -85,13 +85,28 @@ export async function Delete(req,res,next){
         const result = await context.CategoryModel.findOne({where: {id: id}})
 
         if(!result){
-            return res.redirect("/Category/index")
+            return res.redirect("/categories/index") 
         }
 
         await context.CategoryModel.destroy({where: {id: id}});
-        return res.redirect("/Category/index")
+        return res.redirect("/categories/index") 
     }
     catch(ex){
         console.error("error in Delete", ex)
+    }
+}
+
+export async function GetDelete(req, res, next) {
+    const id = req.params.categoryId;
+    try {
+        const result = await context.CategoryModel.findOne({ where: { id: id } });
+        if (!result) return res.redirect("/categories/index");
+        const category = result.dataValues;
+        return res.render("category/delete", {
+            category: category,
+            "page-title": `Eliminar categoría: ${category.name}`
+        });
+    } catch (ex) {
+        console.error("Error fetching category for delete", ex);
     }
 }

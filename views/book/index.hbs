@@ -17,7 +17,8 @@
     <div class="col-12 col-sm-4 col-md-4 mb-4">
         <div class="card shadow-sm">
             {{#if this.coverImage}}
-            <img src="{{this.coverImage}}" class="card-img-top" alt="Portada de {{this.title}}" style="height: 200px; object-fit: cover;">
+            <img src="{{this.coverImage}}" class="card-img-top" alt="Portada de {{this.title}}"
+                style="height: 200px; object-fit: cover;">
             {{else}}
             <div class="d-flex align-items-center justify-content-center bg-light" style="height: 200px;">
                 <i class="bi bi-book fs-1 text-muted"></i>
@@ -41,12 +42,9 @@
                     <a href="/books/edit/{{this.id}}" class="btn btn-primary btn-sm">
                         <i class="bi bi-pencil"></i> Editar
                     </a>
-                    <form action="/books/delete" method="POST">
-                        <input type="hidden" name="bookId" value="{{this.id}}">
-                        <button type="submit" class="btn btn-danger btn-sm confirm-delete">
-                            <i class="bi bi-trash3"></i> Eliminar
-                        </button>
-                    </form>
+                    <a href="/books/delete/{{this.id}}" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash3"></i> Eliminar
+                    </a>
                 </div>
             </div>
         </div>
@@ -62,15 +60,3 @@
     </div>
 </div>
 {{/if}}
-
-{{#section "scripts"}}
-<script>
-    document.querySelectorAll(".confirm-delete").forEach((btn) => {
-        btn.addEventListener("click", function (e) {
-            if (!confirm("¿Está seguro que desea eliminar este libro?")) {
-                e.preventDefault();
-            }
-        });
-    });
-</script>
-{{/section}}
